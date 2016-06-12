@@ -10,7 +10,8 @@ zero.to.na <- function(ds, vars) {
   ds
 }
 
-ds <- zero.to.na(pima, c("diastolic","glucose","triceps","insulin","bmi"))
+vars <- c("diastolic","glucose","triceps","insulin","bmi")
+ds <- zero.to.na(pima, vars)
 apply(ds, 2, function(x) sum(is.na(x)))
 
 
@@ -26,8 +27,8 @@ replace.na.value <- function(ds, vars, navalue){
   ds
 }
 
-ds1 <- replace.na.value(pima,  c("diastolic","glucose","triceps","insulin","bmi"), 0)
-apply(ds1, 2, function(x) sum(is.na(x)))
+ds1 <- replace.na.value(pima,  vars, 0)
+apply(ds1, 2,function(x) sum(is.na(x)))
 
 #reload original data set
 rm(pima)
@@ -45,7 +46,7 @@ replace.na.value <- function(navalue){
 
 
 replace.na.zero <- replace.na.value(0)
-ds2 <- replace.na.zero(pima,  c("diastolic","glucose","triceps","insulin","bmi"))
+ds2 <- replace.na.zero(pima,  vars)
 apply(ds2, 2, function(x) sum(is.na(x)))
 
 #reload original data set
@@ -59,5 +60,5 @@ replace.na.value1 <- function(navalue){
   }
 }
 replace.na.zero1 <- replace.na.value1(0)
-pima[c("diastolic","glucose","triceps","insulin","bmi")] <- replace.na.zero1(pima[c("diastolic","glucose","triceps","insulin","bmi")] )
+pima[vars] <- replace.na.zero1(pima[vars] )
 apply(pima, 2, function(x) sum(is.na(x)))
